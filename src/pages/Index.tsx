@@ -144,7 +144,7 @@ const mapObjects = [
 const stats = [
   { value: "47", label: "коттеджей" },
   { value: "120", label: "га территории" },
-  { value: "40 мин", label: "до Москвы" },
+  { value: "20 мин", label: "до Смоленска" },
   { value: "2026", label: "сдача посёлка" },
 ];
 
@@ -280,14 +280,14 @@ export default function Index() {
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pb-20 md:pb-28">
           <div className="max-w-3xl">
             <p className="font-body text-sm tracking-[0.3em] uppercase mb-6" style={{ color: "hsl(38,55%,65%)", animation: "fade-up 0.8s ease-out 0.3s both" }}>
-              Коттеджный посёлок · Подмосковье
+              Коттеджный посёлок · Смоленская область
             </p>
             <h1 className="font-display text-white font-light leading-none mb-6" style={{ fontSize: "clamp(56px, 10vw, 100px)", animation: "fade-up 0.8s ease-out 0.5s both" }}>
               Стан
               <em>Вил</em>
             </h1>
             <p className="font-body font-light leading-relaxed max-w-lg mb-10" style={{ color: "rgba(255,255,255,0.8)", fontSize: "1.125rem", animation: "fade-up 0.8s ease-out 0.7s both" }}>
-              Жизнь в гармонии с природой. 47 коттеджей среди сосновых лесов, в 40 минутах от Москвы.
+              Жизнь в гармонии с природой. 47 коттеджей среди смоленских лесов, в деревне Станички.
             </p>
             <div className="flex flex-col sm:flex-row gap-4" style={{ animation: "fade-up 0.8s ease-out 0.9s both" }}>
               <button
@@ -340,7 +340,7 @@ export default function Index() {
             </h2>
             <p className="font-body text-lg leading-relaxed mb-6" style={{ color: "hsl(30,10%,40%)" }}>
               СтанВил — это закрытый коттеджный посёлок нового поколения. Мы создали пространство, где городской
-              комфорт сочетается с первозданной природой Подмосковья.
+              комфорт сочетается с первозданной природой Смоленского края.
             </p>
             <p className="font-body text-lg leading-relaxed mb-10" style={{ color: "hsl(30,10%,40%)" }}>
               Каждый коттедж проектировался с вниманием к деталям: панорамные окна с видом на лес, тёплые материалы,
@@ -361,8 +361,8 @@ export default function Index() {
           <div className="reveal relative">
             <AboutGallery />
             <div className="absolute -bottom-6 -left-6 p-6 text-white z-10" style={{ backgroundColor: "hsl(38,55%,52%)", maxWidth: "220px" }}>
-              <div className="font-display text-4xl font-light">40</div>
-              <div className="font-body text-sm mt-1 leading-tight">минут до центра Москвы по трассе М-7</div>
+              <div className="font-display text-4xl font-light">20</div>
+              <div className="font-body text-sm mt-1 leading-tight">минут до центра Смоленска</div>
             </div>
           </div>
         </div>
@@ -639,7 +639,7 @@ export default function Index() {
               <div className="flex flex-col gap-5">
                 {[
                   { icon: "Phone", label: "ТЕЛЕФОН", value: "+7 (495) 000-00-00" },
-                  { icon: "MapPin", label: "АДРЕС", value: "Московская обл., Ногинский р-н" },
+                  { icon: "MapPin", label: "АДРЕС", value: "Смоленская обл., Смоленский р-н, д. Станички" },
                   { icon: "Clock", label: "ЧАСЫ РАБОТЫ", value: "Пн–Пт 9:00–20:00, Сб–Вс 10:00–18:00" },
                 ].map((item) => (
                   <div key={item.icon} className="flex items-center gap-3">
@@ -714,7 +714,7 @@ export default function Index() {
             <div>
               <div className="font-display text-2xl text-white font-light mb-3">СтанВил</div>
               <p className="font-body text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.35)" }}>
-                Коттеджный посёлок премиум-класса в Подмосковье
+                Коттеджный посёлок премиум-класса в Смоленской области
               </p>
             </div>
             <div>
@@ -732,7 +732,7 @@ export default function Index() {
               <div className="flex flex-col gap-2">
                 <span className="font-body text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>+7 (495) 000-00-00</span>
                 <span className="font-body text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>info@stanvil.ru</span>
-                <span className="font-body text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>Московская обл.</span>
+                <span className="font-body text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>Смоленская обл., д. Станички</span>
               </div>
             </div>
           </div>
