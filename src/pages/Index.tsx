@@ -142,9 +142,9 @@ const mapObjects = [
 ];
 
 const stats = [
-  { value: "47", label: "коттеджей" },
-  { value: "120", label: "га территории" },
-  { value: "20 мин", label: "до Смоленска" },
+  { value: "180", label: "участков" },
+  { value: "32", label: "га территории" },
+  { value: "20 мин", label: "до центра Смоленска" },
   { value: "2026", label: "сдача посёлка" },
 ];
 
@@ -287,7 +287,7 @@ export default function Index() {
               <em>Вил</em>
             </h1>
             <p className="font-body font-light leading-relaxed max-w-lg mb-10" style={{ color: "rgba(255,255,255,0.8)", fontSize: "1.125rem", animation: "fade-up 0.8s ease-out 0.7s both" }}>
-              Жизнь в гармонии с природой. 47 коттеджей среди смоленских лесов, в деревне Станички.
+              Жизнь в гармонии с природой. 180 участков среди смоленских лесов, в деревне Станички.
             </p>
             <div className="flex flex-col sm:flex-row gap-4" style={{ animation: "fade-up 0.8s ease-out 0.9s both" }}>
               <button
