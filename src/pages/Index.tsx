@@ -1,6 +1,89 @@
 import { useState, useEffect, useRef } from "react";
 import Icon from "@/components/ui/icon";
 
+const ABOUT_PHOTOS = [
+  "https://cdn.poehali.dev/projects/81fb4012-bd8d-4cdc-9eb1-7f33f4407205/bucket/190bf264-9021-48e6-a4a4-6db69ee8affc.jpg",
+  "https://cdn.poehali.dev/projects/81fb4012-bd8d-4cdc-9eb1-7f33f4407205/bucket/c4bf963b-0530-47b2-80c8-2bb0ca496f10.jpg",
+  "https://cdn.poehali.dev/projects/81fb4012-bd8d-4cdc-9eb1-7f33f4407205/bucket/d62354df-eacd-407d-9098-557780ec0448.jpg",
+  "https://cdn.poehali.dev/projects/81fb4012-bd8d-4cdc-9eb1-7f33f4407205/bucket/4bbb71aa-a414-4d61-bbd4-bc74b124d7c6.jpg",
+  "https://cdn.poehali.dev/projects/81fb4012-bd8d-4cdc-9eb1-7f33f4407205/bucket/753d24be-abac-4d60-a070-1a17d911a27d.jpg",
+];
+
+function AboutGallery() {
+  const [current, setCurrent] = useState(0);
+  const [animating, setAnimating] = useState(false);
+
+  const go = (idx: number) => {
+    if (animating || idx === current) return;
+    setAnimating(true);
+    setTimeout(() => {
+      setCurrent(idx);
+      setAnimating(false);
+    }, 300);
+  };
+
+  const prev = () => go((current - 1 + ABOUT_PHOTOS.length) % ABOUT_PHOTOS.length);
+  const next = () => go((current + 1) % ABOUT_PHOTOS.length);
+
+  return (
+    <div className="relative" style={{ aspectRatio: "4/5", overflow: "hidden" }}>
+      {/* Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center transition-opacity duration-300"
+        style={{
+          backgroundImage: `url(${ABOUT_PHOTOS[current]})`,
+          opacity: animating ? 0 : 1,
+        }}
+      />
+
+      {/* Arrows */}
+      <button
+        onClick={prev}
+        className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center transition-all duration-200"
+        style={{ backgroundColor: "rgba(0,0,0,0.45)", color: "white" }}
+        onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.7)")}
+        onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.45)")}
+      >
+        <Icon name="ChevronLeft" size={20} />
+      </button>
+      <button
+        onClick={next}
+        className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center transition-all duration-200"
+        style={{ backgroundColor: "rgba(0,0,0,0.45)", color: "white" }}
+        onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.7)")}
+        onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.45)")}
+      >
+        <Icon name="ChevronRight" size={20} />
+      </button>
+
+      {/* Dots */}
+      <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
+        {ABOUT_PHOTOS.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => go(i)}
+            className="transition-all duration-300"
+            style={{
+              width: i === current ? "24px" : "8px",
+              height: "8px",
+              borderRadius: "4px",
+              backgroundColor: i === current ? "white" : "rgba(255,255,255,0.5)",
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Counter */}
+      <div
+        className="absolute top-3 right-3 z-10 font-body text-xs px-2.5 py-1"
+        style={{ backgroundColor: "rgba(0,0,0,0.45)", color: "white", borderRadius: "2px" }}
+      >
+        {current + 1} / {ABOUT_PHOTOS.length}
+      </div>
+    </div>
+  );
+}
+
 const HERO_IMAGE = "https://cdn.poehali.dev/projects/81fb4012-bd8d-4cdc-9eb1-7f33f4407205/bucket/190bf264-9021-48e6-a4a4-6db69ee8affc.jpg";
 
 const cottages = [
@@ -276,8 +359,8 @@ export default function Index() {
           </div>
 
           <div className="reveal relative">
-            <div className="aspect-[4/5] bg-cover bg-center" style={{ backgroundImage: `url(${HERO_IMAGE})` }} />
-            <div className="absolute -bottom-6 -left-6 p-6 text-white" style={{ backgroundColor: "hsl(38,55%,52%)", maxWidth: "220px" }}>
+            <AboutGallery />
+            <div className="absolute -bottom-6 -left-6 p-6 text-white z-10" style={{ backgroundColor: "hsl(38,55%,52%)", maxWidth: "220px" }}>
               <div className="font-display text-4xl font-light">40</div>
               <div className="font-body text-sm mt-1 leading-tight">минут до центра Москвы по трассе М-7</div>
             </div>
