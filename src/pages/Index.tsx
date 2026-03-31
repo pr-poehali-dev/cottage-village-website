@@ -145,7 +145,7 @@ const stats = [
   { value: "180", label: "участков" },
   { value: "32", label: "га территории" },
   { value: "20 мин", label: "до центра Смоленска" },
-  { value: "2026", label: "сдача посёлка" },
+  { value: "2025", label: "начало строительства" },
 ];
 
 const faq = [
@@ -340,7 +340,7 @@ export default function Index() {
             </h2>
             <p className="font-body text-lg leading-relaxed mb-6" style={{ color: "hsl(30,10%,40%)" }}>
               СтанВил — это закрытый коттеджный посёлок нового поколения. Мы создали пространство, где городской
-              комфорт сочетается с первозданной природой Смоленского края.
+              комфорт сочетается с первозданной природой Смоленского края. В первой очереди — 26 домов.
             </p>
             <p className="font-body text-lg leading-relaxed mb-10" style={{ color: "hsl(30,10%,40%)" }}>
               Каждый коттедж проектировался с вниманием к деталям: панорамные окна с видом на лес, тёплые материалы,
@@ -348,12 +348,8 @@ export default function Index() {
             </p>
             <div className="flex gap-6">
               <div className="pl-4" style={{ borderLeft: "2px solid hsl(38,55%,52%)" }}>
-                <div className="font-display text-3xl" style={{ color: "hsl(150,25%,22%)" }}>15 лет</div>
+                <div className="font-display text-3xl" style={{ color: "hsl(150,25%,22%)" }}>20 лет</div>
                 <div className="font-body text-sm" style={{ color: "hsl(30,10%,45%)" }}>опыта застройщика</div>
-              </div>
-              <div className="pl-4" style={{ borderLeft: "2px solid hsl(38,55%,52%)" }}>
-                <div className="font-display text-3xl" style={{ color: "hsl(150,25%,22%)" }}>240+</div>
-                <div className="font-body text-sm" style={{ color: "hsl(30,10%,45%)" }}>семей уже живут</div>
               </div>
             </div>
           </div>
