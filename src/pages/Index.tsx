@@ -126,7 +126,7 @@ export default function Index() {
             style={{ color: scrolled ? "hsl(150,25%,22%)" : "white" }}
             onClick={() => scrollTo("hero")}
           >
-            Лесной Берег
+            СтанВил
           </div>
 
           <div className="hidden md:flex items-center gap-8">
@@ -200,9 +200,8 @@ export default function Index() {
               Коттеджный посёлок · Подмосковье
             </p>
             <h1 className="font-display text-white font-light leading-none mb-6" style={{ fontSize: "clamp(56px, 10vw, 100px)", animation: "fade-up 0.8s ease-out 0.5s both" }}>
-              Лесной
-              <br />
-              <em>Берег</em>
+              Стан
+              <em>Вил</em>
             </h1>
             <p className="font-body font-light leading-relaxed max-w-lg mb-10" style={{ color: "rgba(255,255,255,0.8)", fontSize: "1.125rem", animation: "fade-up 0.8s ease-out 0.7s both" }}>
               Жизнь в гармонии с природой. 47 коттеджей среди сосновых лесов, в 40 минутах от Москвы.
@@ -257,7 +256,7 @@ export default function Index() {
               Место,<br />где хочется<br /><em>жить</em>
             </h2>
             <p className="font-body text-lg leading-relaxed mb-6" style={{ color: "hsl(30,10%,40%)" }}>
-              Лесной Берег — это закрытый коттеджный посёлок нового поколения. Мы создали пространство, где городской
+              СтанВил — это закрытый коттеджный посёлок нового поколения. Мы создали пространство, где городской
               комфорт сочетается с первозданной природой Подмосковья.
             </p>
             <p className="font-body text-lg leading-relaxed mb-10" style={{ color: "hsl(30,10%,40%)" }}>
@@ -630,7 +629,7 @@ export default function Index() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-10 mb-10 pb-10" style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
             <div>
-              <div className="font-display text-2xl text-white font-light mb-3">Лесной Берег</div>
+              <div className="font-display text-2xl text-white font-light mb-3">СтанВил</div>
               <p className="font-body text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.35)" }}>
                 Коттеджный посёлок премиум-класса в Подмосковье
               </p>
@@ -649,13 +648,13 @@ export default function Index() {
               <div className="font-body text-xs tracking-widest mb-4" style={{ color: "rgba(255,255,255,0.35)" }}>КОНТАКТЫ</div>
               <div className="flex flex-col gap-2">
                 <span className="font-body text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>+7 (495) 000-00-00</span>
-                <span className="font-body text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>info@lesnoy-bereg.ru</span>
+                <span className="font-body text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>info@stanvil.ru</span>
                 <span className="font-body text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>Московская обл.</span>
               </div>
             </div>
           </div>
           <div className="flex flex-col md:flex-row justify-between gap-4">
-            <span className="font-body text-xs" style={{ color: "rgba(255,255,255,0.25)" }}>© 2026 Лесной Берег. Все права защищены.</span>
+            <span className="font-body text-xs" style={{ color: "rgba(255,255,255,0.25)" }}>© 2026 СтанВил. Все права защищены.</span>
             <span className="font-body text-xs" style={{ color: "rgba(255,255,255,0.25)" }}>Политика конфиденциальности</span>
           </div>
         </div>
