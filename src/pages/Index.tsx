@@ -85,16 +85,30 @@ function AboutGallery() {
 }
 
 const HERO_IMAGE = "https://cdn.poehali.dev/projects/81fb4012-bd8d-4cdc-9eb1-7f33f4407205/bucket/190bf264-9021-48e6-a4a4-6db69ee8affc.jpg";
+const SOSNOVIY_COLLAGE = "https://cdn.poehali.dev/projects/81fb4012-bd8d-4cdc-9eb1-7f33f4407205/bucket/4ccc5192-2acf-437d-87bb-fe3a2bd0580d.jpg";
+
+// Отдельные зоны коллажа коттеджа «Сосновый» (через backgroundPosition)
+// Коллаж: 2 колонки (лев 42%, прав 58%), 3 ряда справа
+const SOSNOVIY_GALLERY = [
+  { label: "Экстерьер",        pos: "2% 5%",    scale: "240% 270%" },
+  { label: "Спальня",          pos: "60% 4%",   scale: "240% 270%" },
+  { label: "Гардероб",         pos: "100% 4%",  scale: "240% 270%" },
+  { label: "Детская",          pos: "60% 52%",  scale: "240% 270%" },
+  { label: "Ванная",           pos: "100% 52%", scale: "240% 270%" },
+  { label: "Гостиная",         pos: "60% 100%", scale: "240% 270%" },
+  { label: "Кухня-столовая",   pos: "100% 100%", scale: "240% 270%" },
+  { label: "Планировка",       pos: "2% 100%",  scale: "240% 270%" },
+];
 
 const cottages = [
   {
     id: 1,
     name: "«Сосновый»",
-    area: "120 м²",
+    area: "98 м²",
     rooms: "3 комнаты",
     price: "от 8 500 000 ₽",
     tag: "Популярный",
-    img: HERO_IMAGE,
+    img: SOSNOVIY_COLLAGE,
     features: ["Терраса", "Сауна", "Камин"],
   },
   {
@@ -156,6 +170,7 @@ export default function Index() {
   const [scrolled, setScrolled] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({ name: "", phone: "", message: "" });
+  const [lightboxImg, setLightboxImg] = useState<{ pos: string; scale: string; label: string } | null>(null);
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -163,6 +178,27 @@ export default function Index() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (!lightboxImg) return;
+      if (e.key === "Escape") setLightboxImg(null);
+      if (e.key === "ArrowLeft") {
+        const idx = SOSNOVIY_GALLERY.findIndex(g => g.pos === lightboxImg.pos);
+        setLightboxImg(SOSNOVIY_GALLERY[(idx - 1 + SOSNOVIY_GALLERY.length) % SOSNOVIY_GALLERY.length]);
+      }
+      if (e.key === "ArrowRight") {
+        const idx = SOSNOVIY_GALLERY.findIndex(g => g.pos === lightboxImg.pos);
+        setLightboxImg(SOSNOVIY_GALLERY[(idx + 1) % SOSNOVIY_GALLERY.length]);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = lightboxImg ? "hidden" : "";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [lightboxImg]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -369,16 +405,63 @@ export default function Index() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {cottages.map((c, i) => (
-              <div key={c.id} className="bg-white group cursor-pointer reveal overflow-hidden" style={{ animationDelay: `${i * 0.15}s` }}>
-                <div className="relative overflow-hidden" style={{ aspectRatio: "4/3" }}>
+              <div key={c.id} className="bg-white group reveal overflow-hidden" style={{ animationDelay: `${i * 0.15}s` }}>
+                {/* Главное фото */}
+                <div className="relative overflow-hidden cursor-pointer" style={{ aspectRatio: "4/3" }}
+                  onClick={() => c.id === 1 && setLightboxImg(SOSNOVIY_GALLERY[0])}
+                >
                   <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                    style={{ backgroundImage: `url(${c.img})` }}
+                    className="absolute inset-0 transition-transform duration-700 group-hover:scale-105"
+                    style={{
+                      backgroundImage: `url(${c.img})`,
+                      backgroundSize: c.id === 1 ? SOSNOVIY_GALLERY[0].scale : "cover",
+                      backgroundPosition: c.id === 1 ? SOSNOVIY_GALLERY[0].pos : "center",
+                    }}
                   />
                   <div className="absolute top-4 left-4 text-white font-body text-xs px-3 py-1.5 tracking-wide" style={{ backgroundColor: "hsl(150,25%,22%)" }}>
                     {c.tag}
                   </div>
+                  {c.id === 1 && (
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      style={{ backgroundColor: "rgba(0,0,0,0.3)" }}>
+                      <div className="flex items-center gap-2 text-white font-body text-sm px-4 py-2"
+                        style={{ backgroundColor: "rgba(0,0,0,0.5)", borderRadius: "2px" }}>
+                        <Icon name="ZoomIn" size={16} />
+                        Смотреть
+                      </div>
+                    </div>
+                  )}
                 </div>
+
+                {/* Миниатюрная галерея для «Сосновый» */}
+                {c.id === 1 && (
+                  <div className="grid grid-cols-4 gap-0.5 mt-0.5">
+                    {SOSNOVIY_GALLERY.slice(1, 5).map((g, gi) => (
+                      <div
+                        key={gi}
+                        className="relative overflow-hidden cursor-pointer"
+                        style={{ aspectRatio: "1/1" }}
+                        onClick={() => setLightboxImg(g)}
+                        title={g.label}
+                      >
+                        <div
+                          className="w-full h-full transition-transform duration-300 hover:scale-110"
+                          style={{
+                            backgroundImage: `url(${SOSNOVIY_COLLAGE})`,
+                            backgroundSize: g.scale,
+                            backgroundPosition: g.pos,
+                            backgroundRepeat: "no-repeat",
+                          }}
+                        />
+                        <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-200 flex items-end"
+                          style={{ background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 60%)" }}>
+                          <span className="font-body text-white px-1.5 pb-1" style={{ fontSize: "9px" }}>{g.label}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
                 <div className="p-6">
                   <h3 className="font-display text-2xl font-light mb-1" style={{ color: "hsl(30,15%,12%)" }}>{c.name}</h3>
                   <div className="flex gap-4 mb-4">
@@ -716,6 +799,102 @@ export default function Index() {
           </div>
         </div>
       </footer>
+
+      {/* LIGHTBOX */}
+      {lightboxImg && (
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center"
+          style={{ backgroundColor: "rgba(0,0,0,0.92)", animation: "fade-in 0.25s ease-out" }}
+          onClick={() => setLightboxImg(null)}
+        >
+          <div
+            className="relative flex flex-col items-center"
+            style={{ maxWidth: "92vw", maxHeight: "92vh" }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Кнопка закрытия */}
+            <button
+              onClick={() => setLightboxImg(null)}
+              className="absolute top-3 right-3 z-10 w-10 h-10 flex items-center justify-center transition-colors duration-200"
+              style={{ backgroundColor: "rgba(255,255,255,0.15)", color: "white", borderRadius: "50%" }}
+              onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.3)")}
+              onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.15)")}
+            >
+              <Icon name="X" size={20} />
+            </button>
+
+            {/* Навигация по галерее */}
+            <button
+              onClick={() => {
+                const idx = SOSNOVIY_GALLERY.findIndex(g => g.pos === lightboxImg.pos);
+                setLightboxImg(SOSNOVIY_GALLERY[(idx - 1 + SOSNOVIY_GALLERY.length) % SOSNOVIY_GALLERY.length]);
+              }}
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center transition-colors duration-200"
+              style={{ backgroundColor: "rgba(255,255,255,0.15)", color: "white", borderRadius: "50%" }}
+              onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.3)")}
+              onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.15)")}
+            >
+              <Icon name="ChevronLeft" size={20} />
+            </button>
+            <button
+              onClick={() => {
+                const idx = SOSNOVIY_GALLERY.findIndex(g => g.pos === lightboxImg.pos);
+                setLightboxImg(SOSNOVIY_GALLERY[(idx + 1) % SOSNOVIY_GALLERY.length]);
+              }}
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center transition-colors duration-200"
+              style={{ backgroundColor: "rgba(255,255,255,0.15)", color: "white", borderRadius: "50%" }}
+              onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.3)")}
+              onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.15)")}
+            >
+              <Icon name="ChevronRight" size={20} />
+            </button>
+
+            {/* Изображение — зум нужного фрагмента коллажа */}
+            <div
+              style={{
+                width: "min(700px, 88vw)",
+                height: "min(480px, 75vh)",
+                backgroundImage: `url(${SOSNOVIY_COLLAGE})`,
+                backgroundSize: lightboxImg.scale,
+                backgroundPosition: lightboxImg.pos,
+                backgroundRepeat: "no-repeat",
+                animation: "fade-in 0.2s ease-out",
+                boxShadow: "0 25px 60px rgba(0,0,0,0.6)",
+              }}
+            />
+
+            {/* Подпись и счётчик */}
+            <div className="mt-4 flex items-center gap-6">
+              <span className="font-body text-sm" style={{ color: "rgba(255,255,255,0.7)" }}>
+                {lightboxImg.label}
+              </span>
+              <span className="font-body text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
+                {SOSNOVIY_GALLERY.findIndex(g => g.pos === lightboxImg.pos) + 1} / {SOSNOVIY_GALLERY.length}
+              </span>
+            </div>
+
+            {/* Точки-навигация */}
+            <div className="flex gap-2 mt-3">
+              {SOSNOVIY_GALLERY.map((g, i) => (
+                <button
+                  key={i}
+                  onClick={() => setLightboxImg(g)}
+                  style={{
+                    width: g.pos === lightboxImg.pos ? "20px" : "8px",
+                    height: "8px",
+                    borderRadius: "4px",
+                    backgroundColor: g.pos === lightboxImg.pos ? "white" : "rgba(255,255,255,0.35)",
+                    transition: "all 0.3s",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                  title={g.label}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       <style>{`
         @keyframes subtle-zoom {
