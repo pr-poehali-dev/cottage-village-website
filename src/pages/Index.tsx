@@ -121,7 +121,6 @@ const cottages = [
 
 const infra = [
   { icon: "Trees", label: "Лесной массив", desc: "200 га сосновых лесов вокруг посёлка" },
-  { icon: "Waves", label: "Озеро", desc: "Чистое озеро с пляжем в 300 м" },
   { icon: "Shield", label: "Охрана 24/7", desc: "КПП, видеонаблюдение, патрулирование" },
   { icon: "Zap", label: "Инженерия", desc: "Газ, электричество, водопровод, канализация" },
   { icon: "GraduationCap", label: "Школа", desc: "Начальная школа в 2 км от посёлка" },
@@ -129,16 +128,12 @@ const infra = [
 ];
 
 const mapObjects = [
-  { id: 1, label: "Въезд / КПП", x: 12, y: 75, color: "#6B7F6E", icon: "Shield" },
-  { id: 2, label: "Озеро", x: 30, y: 25, color: "#4A90D9", icon: "Waves" },
-  { id: 3, label: "Пляж", x: 38, y: 35, color: "#D4A843", icon: "Sun" },
-  { id: 4, label: "Лесная зона", x: 65, y: 15, color: "#4A7C59", icon: "Trees" },
-  { id: 5, label: "Коттеджи тип А", x: 45, y: 55, color: "#8B5E3C", icon: "Home" },
-  { id: 6, label: "Коттеджи тип Б", x: 60, y: 65, color: "#8B5E3C", icon: "Home" },
-  { id: 7, label: "Клубный дом", x: 35, y: 60, color: "#C4702B", icon: "Coffee" },
-  { id: 8, label: "Детская площадка", x: 50, y: 45, color: "#E8734A", icon: "Star" },
-  { id: 9, label: "Спортзона", x: 72, y: 48, color: "#5B8A6F", icon: "Bike" },
-  { id: 10, label: "Выход в лес", x: 80, y: 30, color: "#4A7C59", icon: "Footprints" },
+  { id: 1, label: "Въезд / КПП", x: 14, y: 70, color: "#6B7F6E", icon: "Shield" },
+  { id: 4, label: "Лесная зона", x: 50, y: 8, color: "#4A7C59", icon: "Trees" },
+  { id: 5, label: "Коттеджи тип А", x: 55, y: 38, color: "#8B5E3C", icon: "Home" },
+  { id: 6, label: "Коттеджи тип Б", x: 55, y: 72, color: "#8B5E3C", icon: "Home" },
+  { id: 8, label: "Детская площадка", x: 88, y: 18, color: "#E8734A", icon: "Star" },
+  { id: 9, label: "Спортзона", x: 10, y: 58, color: "#5B8A6F", icon: "Bike" },
 ];
 
 const stats = [
@@ -465,28 +460,11 @@ export default function Index() {
 
           <div className="grid lg:grid-cols-3 gap-8 items-start">
             <div className="lg:col-span-2 reveal">
-              <div className="relative w-full" style={{ paddingBottom: "65%" }}>
+              <div className="relative w-full" style={{ paddingBottom: "78%" }}>
                 <div
-                  className="absolute inset-0"
-                  style={{ background: "linear-gradient(135deg, #2d4a35 0%, #3a6147 40%, #2a5a3d 70%, #1e3d29 100%)" }}
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: "url(https://cdn.poehali.dev/projects/81fb4012-bd8d-4cdc-9eb1-7f33f4407205/bucket/b7555b37-fe5c-4b9b-a698-3e8854f53207.jpg)" }}
                 >
-                  {/* Forest zones */}
-                  <div className="absolute top-0 right-0 rounded-bl-[80px]" style={{ width: "40%", height: "60%", background: "rgba(20,45,25,0.55)" }} />
-                  <div className="absolute bottom-0 left-0 rounded-tr-[60px]" style={{ width: "25%", height: "30%", background: "rgba(15,38,20,0.45)" }} />
-
-                  {/* Lake */}
-                  <div className="absolute" style={{ left: "22%", top: "12%", width: "22%", height: "28%", background: "rgba(74,144,217,0.65)", borderRadius: "50% 60% 40% 55%", boxShadow: "0 0 40px rgba(74,144,217,0.3)" }} />
-
-                  {/* Roads */}
-                  <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 65" preserveAspectRatio="none">
-                    <path d="M 5 80 L 12 72 L 25 62 L 40 55 L 55 52 L 70 54 L 85 50" stroke="rgba(255,255,255,0.18)" strokeWidth="0.8" fill="none" strokeDasharray="2 1" />
-                    <path d="M 40 55 L 42 38 L 40 20" stroke="rgba(255,255,255,0.12)" strokeWidth="0.6" fill="none" />
-                    <path d="M 55 52 L 57 38 L 60 22" stroke="rgba(255,255,255,0.12)" strokeWidth="0.6" fill="none" />
-                  </svg>
-
-                  {/* Cottage zones */}
-                  <div className="absolute" style={{ left: "38%", top: "44%", width: "18%", height: "18%", border: "1px dashed rgba(212,168,67,0.45)", borderRadius: "4px" }} />
-                  <div className="absolute" style={{ left: "54%", top: "54%", width: "16%", height: "15%", border: "1px dashed rgba(212,168,67,0.45)", borderRadius: "4px" }} />
 
                   {/* Map objects */}
                   {mapObjects.map((obj) => (
